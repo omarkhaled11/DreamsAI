@@ -1,0 +1,4 @@
+{
+  "contextFiles": ["PRD.md", "README.md", ".cursor/context.md"],
+  "exclude": ["node_modules", "dist"]
+}
