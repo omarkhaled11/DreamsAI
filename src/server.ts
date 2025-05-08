@@ -1,21 +1,17 @@
 import express from "express";
 import dotenv from "dotenv";
-import interpretRouter from "./routes/interpret";
 import path from "path";
-import winston from "winston";
 import cors from "cors";
+import interpretRouter from "./routes/interpret";
+import logger from "./lib/logger";
+import morgan from "morgan";
 
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
 
-const logger = winston.createLogger({
-  level: "info",
-  format: winston.format.simple(),
-  transports: [new winston.transports.Console()],
-});
-
 app.use(cors());
+app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../public")));
 app.use("/interpret", interpretRouter);
