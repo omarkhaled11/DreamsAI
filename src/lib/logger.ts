@@ -2,7 +2,13 @@ import winston from "winston";
 
 const logger = winston.createLogger({
   level: "info",
-  format: winston.format.simple(),
+  format: winston.format.combine(
+    winston.format.timestamp(),
+    winston.format.printf(({ level, message, timestamp }) => {
+      const levelUpper = level.toUpperCase();
+      return `[${levelUpper}] ${message}`;
+    })
+  ),
   transports: [new winston.transports.Console()],
 });
 
